@@ -9,20 +9,20 @@ Aplicación web que consume la [D&D 5e API](https://www.dnd5eapi.co/) para gener
 -  Rellenar el personaje manualmente
 -  Seleccionar raza, clase y trasfondo desde desplegables conectados a la API
 -  Generar un personaje completamente aleatorio con un clic
+-  Descargar la ficha oficial en PDF con sus datos
 
 ##  Estructura del proyecto
 ```
-proyecto/
-├── index.html
-├── explorador.html
-├── sobre-mi.html
+D&D_5e_API/
+├── html/
+│   ├── index.html        ← Página principal con explicación de D&D
+│   ├── creador.html      ← Creador de personaje con ficha descargable
+│   └── sobreMi.html      ← Información del autor
 ├── css/
-│   ├── style.css
-│   └── sobre-mi.css
+│   └── style.css         ← Estilos globales
 ├── js/
-│   ├── main.js
-│   └── explorador.js
-└── img/
+│   └── main.js           ← Lógica y llamadas a la API
+└── imagenes/             ← Recursos gráficos
 ```
 
 ##  API utilizada
@@ -32,7 +32,7 @@ Endpoints utilizados:
 - `/api/races` — Listado de razas
 - `/api/classes` — Listado de clases
 - `/api/backgrounds` — Trasfondos
-- `/api/spells` — Hechizos
+- `/api/ability-scores` — Puntuaciones de habilidad
 
 ##  Tecnologías
 
