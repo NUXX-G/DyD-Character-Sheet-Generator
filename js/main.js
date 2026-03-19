@@ -76,11 +76,11 @@ function mostrarFicha(nombre, raza, clase, alineamiento)
 {
     const ficha = document.getElementById("ficha-personaje");
     ficha.innerHTML = "<h2>" + nombre + "</h2>" 
-                    + "<p><strong>Raza:</strong>" + raza.name + "</p>" 
-                    + "<p><strong>Tamaño:</strong>" + raza.size + "</p>" 
-                    + "<p><strong>Clase:</strong>" + clase.name + "</p>" 
-                    + "<p><strong>Vida:</strong>" + "d"+clase.hit_die + "</p>" 
-                    + "<p><strong>Alineamiento:</strong>" + alineamiento + "</p>";
+                    + "<p><strong>Raza: </strong>" + raza.name + "</p>" 
+                    + "<p><strong>Tamaño: </strong>" + raza.size + "</p>" 
+                    + "<p><strong>Clase: </strong>" + clase.name + "</p>" 
+                    + "<p><strong>Vida: </strong>" + "d"+clase.hit_die + "</p>" 
+                    + "<p><strong>Alineamiento: </strong>" + alineamiento + "</p>";
     ficha.classList.remove("oculto");
 }
 
@@ -91,4 +91,30 @@ function generar()
     const claseIndex = document.getElementById("select-clase").value;
     const selectAlineamiento = document.getElementById("select-alineamiento");
     const alineamiento = selectAlineamiento.options[selectAlineamiento.selectedIndex].text;
+
+    if (nombre === "" || razaIndex === "" || claseIndex === "" || selectAlineamiento.value === "") 
+    {
+        alert("Rellena todos los campos.");
+        return;
+    }
+
+    try {
+        fetch(BASE_URL + "/races/" + razaIndex)
+            .then(respuesta => respuesta.json())
+            .then(datosRaza => {
+                fetch(BASE_URL + "/classes/" + claseIndex)
+                    .then(respuesta => respuesta.json())
+                    .then(datosClase => {
+                        mostrarFicha(nombre, datosRaza, datosClase, alineamiento);
+                    })
+                    .catch(error => {
+                        alert("Error: " + error.message);
+                    });
+            })
+            .catch(error => {
+                alert("Error: " + error.message);
+            });
+    } catch (error) {
+        alert("Error inesperado: " + error.message);
+    }
 }
