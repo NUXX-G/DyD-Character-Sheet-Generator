@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Nelson Filipe Fardilha Karlsson">
     <title>Creador de Personaje | D&D 5e</title>
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script> <!--Necesito usar esta libreria si o si, debido a la tarea adicional que me pusistes de modificar el pdf con los datos-->
     <link rel="stylesheet" href="../style.css">
     <link rel="icon" type="image/png" href="../imagenes/Dungeons-And-Dragons-Logo-PNG-Pic.webp">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato&display=swap" rel="stylesheet">
@@ -53,8 +53,7 @@
                 </select>
                 <button id="btn-generar">Generar Personaje</button>
                 <button id="btn-aleatorio">Aleatorio</button>
-                <a href="../recursos/dnd-5ta-edicion-hoja-de-personaje-espanol1.pdf" download class="boton">Descargar Plantilla</a>
-            </div>
+                <button id="btn-plantilla">Descargar Plantilla</button>            </div>
 
             <div id="ficha-personaje" class="oculto"></div>
 
