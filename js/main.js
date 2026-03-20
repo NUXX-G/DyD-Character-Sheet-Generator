@@ -75,12 +75,17 @@ function cargarAlineamientos()
 function mostrarFicha(nombre, raza, clase, alineamiento)
 {
     const ficha = document.getElementById("ficha-personaje");
+    let bonos = "";
+    raza.ability_bonuses.forEach(bono => {
+        bonos = bonos + bono.ability_score.name + " +" + bono.bonus + " ";
+    });
     ficha.innerHTML = "<h2>" + nombre + "</h2>" 
                     + "<p><strong>Raza: </strong>" + raza.name + "</p>" 
                     + "<p><strong>Tamaño: </strong>" + raza.size + "</p>" 
                     + "<p><strong>Clase: </strong>" + clase.name + "</p>" 
                     + "<p><strong>Vida: </strong>" + "d"+clase.hit_die + "</p>" 
-                    + "<p><strong>Alineamiento: </strong>" + alineamiento + "</p>";
+                    + "<p><strong>Alineamiento: </strong>" + alineamiento + "</p>"
+                    + "<p><strong>Bonificadores: </strong>" + bonos + "</p>";
     ficha.classList.remove("oculto");
 }
 
