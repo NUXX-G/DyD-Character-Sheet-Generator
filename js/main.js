@@ -4,7 +4,7 @@ const BASE_URL = "https://www.dnd5eapi.co/api";
 document.addEventListener("DOMContentLoaded", () => {
     cargarRazas();
     cargarClases();
-    cargarAlinemientos();
+    cargarAlineamientos();
 
     document.getElementById("btn-generar").addEventListener("click", () => {
         generar();
@@ -53,13 +53,13 @@ function cargarClases()
         });
 }
 
-function cargarAlinemientos()
+function cargarAlineamientos()
 {
     const select = document.getElementById("select-alineamiento")
     fetch(BASE_URL + "/alignments")
         .then(respuesta => respuesta.json())
         .then(datos => {
-            select.innerHTML = '<option value="">Elige un alineamieto</option>';
+            select.innerHTML = '<option value="">Elige un alineamiento</option>';
             datos.results.forEach(alineamiento => {
                 const opcion = document.createElement("option");
                 opcion.value = alineamiento.index;
@@ -117,4 +117,28 @@ function generar()
     } catch (error) {
         alert("Error inesperado: " + error.message);
     }
+}
+
+function generarAleatorio()
+{
+    fetch(BASE_URL + "/races")
+        .then(respuesta => respuesta.json())
+        .then(datosRaza => {
+            const raza = datosRaza.results[Math.floor(Math.random() * datosRaza.results.length)];
+                fetch(BASE_URL + "/classes")
+                    .then(respuesta => respuesta.json())
+                    .then(datosClase => {
+                        const clase = datosClase.results[Math.floor(Math.random() * datosClase.results.length)]
+                            fetch(BASE_URL + "/alignments")
+                                .then(respuesta => respuesta.json())
+                                .then(datosAlineamiento => {
+                                    const alineamieto = datosAlineamiento.results[Math.floor(Math.random() * datosAlineamiento.results.length)]
+                                    document.getElementById("select-raza").value = raza.index;
+                                    document.getElementById("select-clase").value = clase.index;
+                                    document.getElementById("select-alineamiento").value = alineamieto.index;
+                                    document.getElementById("input-nombre").value = "Pedro Sanchez";
+                                    generar();
+                                });
+                    });
+        });
 }
